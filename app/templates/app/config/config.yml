@@ -1,0 +1,62 @@
+config:
+    app_version: 1.0
+
+    # Paths
+    assets_dir: /assets  # Relative to /public
+    conf_dir:   %root_path%/app/config
+    cache_dir:  %root_path%/app/cache
+    logs_dir:   %root_path%/app/logs
+
+    # PHP
+    system:
+        memory_limit:       256M
+        max_execution_time: 30
+
+    # Database
+    dbs:
+        default:
+            driver:     %database_driver%
+            host:       %database_host%
+            port:       %database_port%
+            user:       %database_user%
+            password:   %database_password%
+            dbname:     %database_name%
+            charset:    UTF8
+
+    # Timezone / Locale
+    timezone:           Europe/Paris
+    locale:             fr
+    locale_fallback:    fr
+
+    # Logging / Debug
+    debug:          false
+    doctrine_debug: false
+    log_level:      WARNING
+    log_name:       ZeeSilexKit
+
+    # Additional Console Tasks
+    tasks:
+        ClearCache: Zee\Task\ClearCache
+        ClearLogs:  Zee\Task\ClearLogs
+        # example : Fully\Namespaced\ClassName
+
+    # Swiftmailer
+    mailer:
+          from_name:    Zee Agency
+          from_email:   contact@zeeagency.com
+          smtp:
+                host:       %mailer_host%
+                username:   %mailer_user%
+                password:   %mailer_password%
+
+    # Twig
+    twig:
+        debug:              false
+        cache:              %root_path%/app/cache/twig
+        strict_variables:   false
+        auto_reload:        true
+
+    meta:
+        title:          Zee Silex
+        description:    "Zee Silex starter kit"
+        author:         Zee Agency

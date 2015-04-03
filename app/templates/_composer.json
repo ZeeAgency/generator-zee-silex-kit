@@ -1,0 +1,55 @@
+{
+  "name": "<%= _.slugify(appname) %>",
+  "require": {
+    "zee/silex-kit": "dev-master",
+    "symfony/doctrine-bridge": "~2.3",
+    "symfony/security": "~2.3",
+    "symfony/config": "~2.3",
+    "symfony/locale": "~2.3",
+    "symfony/form": "~2.3",
+    "symfony/monolog-bridge": "~2.3",
+    "symfony/options-resolver": "~2.3",
+    "symfony/process": "~2.3",
+    "symfony/serializer": "~2.3",
+    "symfony/translation": "~2.3",
+    "symfony/twig-bridge": "~2.3",
+    "symfony/validator": "~2.3",
+    "silex/silex": "~1.0",
+    "swiftmailer/swiftmailer": "5.*",
+    "incenteev/composer-parameter-handler": "~2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.5"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "Zee\\Composer::postInstall",
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ],
+    "post-update-cmd": [
+      "Zee\\Composer::postInstall",
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ]
+  },
+  "autoload": {
+    "psr-0": {
+      "App": "src/"
+    }
+  },
+  "extra": {
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Romain Jacquart",
+      "email": "rjacquart@zeeagency.com"
+    },
+    {
+      "name": "Julien Cabanès",
+      "email": "jcabanes@zeeagency.com"
+    }
+  ]
+}

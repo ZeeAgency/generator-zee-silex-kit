@@ -1,0 +1,21 @@
+{
+  "name": "generator-zee-silex-kit",
+  "version": "0.0.1",
+  "description": "Zee Agency's generator for Silex",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Romain Jacquart <rjacquart@zeeagency.com>",
+  "contributors": [
+    "Romain Jacquart <rjacquart@zeeagency.com>",
+    "Julien Cabanès <jcabanes@zeeagency.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^0.18.10"
+  }
+}

@@ -1,0 +1,8 @@
+config:
+    debug: true
+    # doctrine_debug: true      # Verbose!
+    log_level: DEBUG
+
+    twig:
+        cache: false
+        debug: true

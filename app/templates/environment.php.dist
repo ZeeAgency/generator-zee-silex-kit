@@ -1,0 +1,4 @@
+<?php
+// return 'prod';
+// return 'staging';
+return 'dev';
