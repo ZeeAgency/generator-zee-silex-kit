@@ -15,7 +15,7 @@ class RenderController
 
     public function indexAction(Application $app)
     {
-        return $app['twig']->render('pages/home.twig');
+        return $app['twig']->render('pages/index.twig');
     }
 
     public function helloAction(Application $app, $name = '')
