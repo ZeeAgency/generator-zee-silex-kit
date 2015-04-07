@@ -13,7 +13,7 @@ module.exports = generators.Base.extend({
       type: 'input',
       name: 'name',
       message: 'Your project name',
-      store: true,
+      // store: true,
       default: this.config.get('name') || this.appname
     }];
 
