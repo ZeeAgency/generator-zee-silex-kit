@@ -1,7 +1,7 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "require": {
-    "zee/silex-kit": "dev-master",
+    "zee/silex-kit": "~1.0",
     "symfony/doctrine-bridge": "~2.3",
     "symfony/security": "~2.3",
     "symfony/config": "~2.3",
