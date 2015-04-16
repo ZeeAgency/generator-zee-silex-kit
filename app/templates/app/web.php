@@ -11,18 +11,7 @@ $twig = $app['twig'];
 /* Error catcher */
 $app->error(function (\Exception $e, $code) use ($app, $twig) {
     if ($app['debug']) {
-        // return;
-    }
-
-    /** @var Request $request */
-    $request = $app['request'];
-
-    if (strpos($request->headers->get('Content-Type'), 'application/json') === 0) {
-        return new JsonResponse(array(
-            'statusCode' => $code,
-            'message' => $e->getMessage(),
-            // 'stacktrace' => $e->getTraceAsString(), // Verbose!
-        ));
+        return null;
     }
 
     $message = '';

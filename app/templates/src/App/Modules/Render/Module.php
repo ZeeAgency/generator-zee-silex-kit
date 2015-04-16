@@ -9,10 +9,9 @@ class Module extends Zee\Module
     public function setup(Application $app)
     {
         parent::setup($app);
-        $module = $this;
 
-        $app['render.controller'] = $this->share(function () use ($app, $module) {
-            return new Controller\RenderController($app, $module);
+        $app['render.controller'] = $this->share(function () use ($app) {
+            return new Controller\RenderController($app, $this);
         });
     }
 
