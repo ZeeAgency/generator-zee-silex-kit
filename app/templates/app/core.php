@@ -22,7 +22,9 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 /**
  * Symfony2 Components
  */
+$app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 /**

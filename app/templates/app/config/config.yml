@@ -38,7 +38,6 @@ config:
     tasks:
         ClearCache: Zee\Task\ClearCache
         ClearLogs:  Zee\Task\ClearLogs
-        # example : Fully\Namespaced\ClassName
 
     # Swiftmailer
     mailer:

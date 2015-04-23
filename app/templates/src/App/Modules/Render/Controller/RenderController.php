@@ -8,9 +8,13 @@ class RenderController
 {
     private $module;
 
+    /** @var \Twig_Environment $twig */
+    private $twig;
+
     public function __construct(Application $app, Module $module)
     {
         $this->module = $module;
+        $this->twig = $module['twig'];
     }
 
     public function indexAction(Application $app)
@@ -20,7 +24,7 @@ class RenderController
 
     public function helloAction(Application $app, $name = '')
     {
-        return $this->module['twig']->render('page.twig', array(
+        return $this->twig->render('page.twig', array(
             'name' => $name,
         ));
     }
