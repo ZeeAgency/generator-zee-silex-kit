@@ -1,6 +1,6 @@
 {
   "name": "generator-zee-silex-kit",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Zee Agency's generator for Silex",
   "main": "app/index.js",
   "scripts": {
