@@ -1,7 +1,4 @@
 <?php
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 $app = require __DIR__.'/core.php';
 
@@ -11,7 +8,7 @@ $twig = $app['twig'];
 /* Error catcher */
 $app->error(function (\Exception $e, $code) use ($app, $twig) {
     if ($app['debug']) {
-        return null;
+        return;
     }
 
     $message = '';
@@ -30,7 +27,7 @@ $app->error(function (\Exception $e, $code) use ($app, $twig) {
         'message' => $message,
     ));
 
-    return new Response($response, $code);
+    return new Symfony\Component\HttpFoundation\Response($response, $code);
 });
 
 return $app;

@@ -6,5 +6,6 @@ parameters:
     database_password: ~
     database_name:     ~
     mailer_host:       127.0.0.1
+    mailer_port:       22
     mailer_user:       ~
     mailer_password:   ~

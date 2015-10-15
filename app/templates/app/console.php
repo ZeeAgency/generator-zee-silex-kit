@@ -1,5 +1,4 @@
 <?php
-use Symfony\Component\Console\Application;
 
 $app = require __DIR__.'/core.php';
 
@@ -11,32 +10,42 @@ $app['monolog']->pushHandler(new Monolog\Handler\RotatingFileHandler(
     false
 ));
 
-$console = new Application('App CLI');
-$classNames = array();
-$tasks = array();
+$console = new Symfony\Component\Console\Application('App CLI');
+$basePath = realpath(__DIR__.'/../src');
+$classes = array();
 
-// Add all tasks in the Tasks directory
-foreach (glob(ROOT_PATH.'/src/App/Task/*.php') as $classPath) {
-    $parts = pathinfo($classPath);
-    array_push($classNames, '\App\Task\\'.$parts['filename']);
+$finder = new Symfony\Component\Finder\Finder();
+$finder->in($basePath)->files()->name('*Command.php');
+
+/** @var \Symfony\Component\Finder\SplFileInfo $file */
+foreach ($finder as $file) {
+    $classPath = $file->getRelativePathname();
+    $namespace = str_replace(DIRECTORY_SEPARATOR, '\\', $file->getRelativePath());
+    $className = $file->getBasename(sprintf('.%s', $file->getExtension()));
+    $fullPath = sprintf('\%s\%s', $namespace, $className);
+
+    $classes[] = $fullPath;
 }
 
 // Add any manually specified tasks
-if (isset($app['config']['tasks'])) {
-    foreach ($app['config']['tasks'] as $className) {
-        array_push($classNames, $className);
+if (isset($app['config']['commands'])) {
+    foreach ($app['config']['commands'] as $command) {
+        $classes[] = $command;
     }
 }
 
-foreach ($classNames as $class) {
-    $task = new $class($app);
-    if ($task instanceof Zee\Task) {
-        $tasks[$class] = $console->register($task->getName());
-        $tasks[$class]->setDefinition($task->getDefinition());
-        $tasks[$class]->setDescription($task->getDescription());
-        $tasks[$class]->setHelp($task->getHelp());
-        $tasks[$class]->setCode($task->getCode());
+foreach ($classes as $command) {
+    $reflection = new \ReflectionClass($command);
+
+    if ($reflection->isInstantiable()) {
+        /** @var \Symfony\Component\Console\Command\Command $instance */
+        $instance = $reflection->newInstance();
+        $console->add($instance);
     }
 }
+
+$helpers = $console->getHelperSet();
+$helpers->set(new Zee\Tools\Helper\SilexApplicationHelper($app));
+$helpers->set(new Zee\Tools\Helper\LoggerHelper($app['monolog']));
 
 return $console;

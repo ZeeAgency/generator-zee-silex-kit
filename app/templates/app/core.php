@@ -1,25 +1,26 @@
 <?php
+
 $autoload = require __DIR__.'/../vendor/autoload.php';
 $app = new Silex\Application();
 
-/**
+/*
  * Environment
  */
 $app->register(new Zee\Provider\EnvironmentServiceProvider());
 
-/**
+/*
  * Doctrine DBAL
  */
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'dbs.options' => $app['config']['dbs'],
 ));
 
-/**
+/*
  * Linkify & Urlify
  */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
-/**
+/*
  * Symfony2 Components
  */
 $app->register(new Silex\Provider\FormServiceProvider());
@@ -27,7 +28,7 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
-/**
+/*
  * Twig
  */
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -35,7 +36,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.options' => $app['config']['twig'],
 ));
 
-/**
+/*
  * Twig Extensions
  */
 $app['twig'] = $app->share($app->extend('twig', function (Twig_Environment $twig, Silex\Application $app) {
@@ -47,7 +48,7 @@ $app['twig'] = $app->share($app->extend('twig', function (Twig_Environment $twig
     return $twig;
 }));
 
-/**
+/*
  * Monolog
  */
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -80,9 +81,7 @@ $app['monolog']->pushHandler($handler);
 /**
  * SwiftMailer
  */
-$app->register(new Silex\Provider\SwiftmailerServiceProvider(), array(
-    'swiftmailer.options' => $app['config']['mailer']['smtp'],
-));
+$app->register(new Silex\Provider\SwiftmailerServiceProvider(), $app['config']['mailer']);
 
 // Must be loaded before Modules...
 $app['orm.mappings'] = $app->share(function () {
@@ -93,12 +92,12 @@ $app['orm.mappings'] = $app->share(function () {
 $app->register(new App\Modules\Render\Module(array('mount' => '/')));
 /**/
 
-/**
+/*
  * Doctrine Logger
  */
 $app->register(new Zee\Provider\DoctrineLoggerServiceProvider());
 
-/**
+/*
  * Doctrine ORM
  */
 $app->register(new Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider(), array(

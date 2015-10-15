@@ -34,19 +34,18 @@ config:
     log_level:      WARNING
     log_name:       ZeeSilexKit
 
-    # Additional Console Tasks
-    tasks:
-        ClearCache: Zee\Task\ClearCache
-        ClearLogs:  Zee\Task\ClearLogs
+    # Additional Console commands
+    commands:
+        ClearCache: Zee\Tools\Command\ClearCacheCommand
+        ClearLogs:  Zee\Tools\Command\ClearLogsCommand
 
     # Swiftmailer
     mailer:
-          from_name:    Zee Agency
-          from_email:   contact@zeeagency.com
-          smtp:
-                host:       %mailer_host%
-                username:   %mailer_user%
-                password:   %mailer_password%
+        swiftmailer.options:
+            host:       %mailer_host%
+            port:       %mailer_port%
+            username:   %mailer_user%
+            password:   %mailer_password%
 
     # Twig
     twig:
